@@ -1,1 +1,3 @@
 ['amolety', 'zapieczone nudle', 'eggplant filled with cheese']
+['wajecznica', 'kanapki z wajcym']
+['avocado salat', 'broccoli with yoghurt dressing']
