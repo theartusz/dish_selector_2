@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\E216932\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe"
+    "python.pythonPath": "C:\\Users\\E216932\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe",
+    "debug.internalConsoleOptions": "neverOpen"
 }

@@ -1,1 +1,4 @@
 dishes.db
+.python_packages
+__pycache__
+.venv
