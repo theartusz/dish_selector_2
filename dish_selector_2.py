@@ -17,12 +17,17 @@ def pick_meal(dish_type_df):
     while True:
         menu_len = len(dish_type_df.index)
         meal_choice = random.randint(0, menu_len - 1)
-        meal = dish_type_df.iloc[[meal_choice], [1]].to_string(header=False, index=False)
+        meal = dish_type_df.iloc[[meal_choice], [1]].to_string(header=False, index=False).strip()
         print('You should make: ' + meal)
         decision = input('[y\\n]: ').lower()
         if decision == 'y':
-            dish_type_df['popularity'][dish_type_df['dish_name'] == meal] = dish_type_df['popularity'][dish_type_df['dish_name']==meal].item()-1
-            break
+            popularity = dish_type_df.loc[dish_type_df['dish_name'] == meal, 'popularity'].item()
+            if popularity == 1:
+                # remove dish from df if popularity is 1 
+                dish_type_df = dish_type_df[dish_type_df['dish_name'] != meal]
+            # decrease popularity
+            else: dish_type_df['popularity'][dish_type_df['dish_name'] == meal] = popularity - 1
+            return dish_type_df
 
 
 def add_meal():
@@ -70,10 +75,10 @@ while True:
     decision = input().lower()
 
     if decision == '1':
-        pick_meal(main_course_df)
+        main_course_df = pick_meal(main_course_df)
 
     elif decision == '2':
-        pick_meal(salat_df)
+        salat_df = pick_meal(salat_df)
     
     elif decision == '4':
         print(main_course_df[['dish_name', 'popularity']])
