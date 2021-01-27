@@ -8,6 +8,7 @@ def read_menu(table):
     conn = sqlite3.connect('dishes.db')
     query = 'SELECT * FROM ' + table
     menu = pandas.read_sql(query,conn)
+    # read from _orig table if all dishes were used
     if len(menu.index) == 0:
         query = 'SELECT * FROM ' + table + '_orig'
         menu = pandas.read_sql(query,conn)
@@ -19,14 +20,15 @@ def pick_meal(dish_type_df):
         meal_choice = random.randint(0, menu_len - 1)
         meal = dish_type_df.iloc[[meal_choice], [1]].to_string(header=False, index=False).strip()
         print('You should make: ' + meal)
-        decision = input('[y\\n]: ').lower()
-        if decision == 'y':
+        decision = input('[y] - accept, [n] - try again, [e] - leave: ').lower()
+        if decision == 'e': break
+        elif decision == 'y':
             popularity = dish_type_df.loc[dish_type_df['dish_name'] == meal, 'popularity'].item()
             if popularity == 1:
                 # remove dish from df if popularity is 1 
                 dish_type_df = dish_type_df[dish_type_df['dish_name'] != meal]
             # decrease popularity
-            else: dish_type_df['popularity'][dish_type_df['dish_name'] == meal] = popularity - 1
+            else: dish_type_df.loc[dish_type_df['dish_name'] == meal, 'popularity'] = popularity - 1
             return dish_type_df
 
 
@@ -58,9 +60,9 @@ def clear():
     else:
         _ = system('clear')
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 Program start
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 clear()
 main_course_df = read_menu('main_course')
@@ -88,6 +90,10 @@ while True:
         add_meal()
     
     elif decision == 'exit':
+        conn = sqlite3.connect('dishes.db')
+        with conn:
+            main_course_df.to_sql('main_course', conn, None, 'replace', False)
+            salat_df.to_sql('salat', conn, None, 'replace', False)
         break
         
 
