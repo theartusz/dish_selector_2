@@ -8,4 +8,4 @@ before_install:
   - docker build -t artusz/dish_selector_2 -f Dockerfile .
 
 script: 
-  - docker run -e CI=true artusz/dish_selector_2  python -m unittest test
+  - docker run artusz/dish_selector_2  python -m unittest test
