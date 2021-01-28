@@ -1,4 +1,4 @@
 env/
-#dishes.db
+dishes.db
 .vscode
 *__pycache*

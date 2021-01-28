@@ -9,3 +9,15 @@ before_install:
 
 script: 
   - docker run artusz/dish_selector_2  python -m unittest test
+
+  deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "dish_selector_2"
+  env: "Dishselector2-env"
+  bucket_name: "elasticbeanstalk-us-east-2-197241319445"
+  bucket_path: "dish_selector_2"
+  on: 
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
