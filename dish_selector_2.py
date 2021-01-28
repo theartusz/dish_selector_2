@@ -72,7 +72,7 @@ print('Hello to the dish selector!')
 
 while True:
     print('\nWhat do you want to do?\n'
-        + '[1 - pick a main course, 2 - pick salat 4 - options, 5 - add meal, exit]')
+        + '[1 - pick a main course, 2 - pick salat, 4 - options, 5 - add meal, exit]')
 
     #decision = input().lower()
     decision = 'exit'
