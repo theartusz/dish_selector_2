@@ -10,7 +10,7 @@ before_install:
 script: 
   - docker run artusz/dish_selector_2  python -m unittest test
 
-  deploy:
+deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
   app: "dish_selector_2"
