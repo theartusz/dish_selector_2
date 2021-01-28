@@ -1,0 +1,11 @@
+# if we want to get use of docker we need tu have sudo permisions
+language: generic
+sudo: required
+services: 
+  - docker
+
+before_install:
+  - docker build -t artusz/dish_selector_2 -f Dockerfile .
+
+script: 
+  - docker run artusz/dish_selector_2  python -m unittest test

@@ -74,7 +74,8 @@ while True:
     print('\nWhat do you want to do?\n'
         + '[1 - pick a main meal, 4 - options, 5 - add meal, exit]')
 
-    decision = input().lower()
+    #decision = input().lower()
+    decision = 'exit'
 
     if decision == '1':
         main_course_df = pick_meal(main_course_df)
