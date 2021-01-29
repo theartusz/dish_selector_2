@@ -2,3 +2,6 @@ env/
 dishes.db
 .vscode
 *__pycache*
+.travis*
+Dockerfile
+venv
