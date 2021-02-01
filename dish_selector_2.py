@@ -6,12 +6,17 @@ from os import name
 
 def read_menu(table):
     conn = sqlite3.connect('dishes.db')
+
+    with open('schema.sql') as f:
+        conn.executescript(f.read())
+        
     query = 'SELECT * FROM ' + table
     menu = pandas.read_sql(query,conn)
     # read from _orig table if all dishes were used
     if len(menu.index) == 0:
         query = 'SELECT * FROM ' + table + '_orig'
         menu = pandas.read_sql(query,conn)
+    conn.close()
     return menu
 
 def pick_meal(dish_type_df):
