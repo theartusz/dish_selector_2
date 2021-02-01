@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} You should cook: {% endblock %}</h1>
+    <a>
+        <h2>{{ meal_choice }}</h2>
+    </a>
+    <button onclick="location.href = '//localhost:5000'" id="confirmButton">confirm choice</button>
+    <button onclick="location.href = '//localhost:5000/main_course'" id="retryButton">try again</button>
+    <button onclick="location.href = '//localhost:5000'" id="exitButton">exit</button>
+{% endblock %}

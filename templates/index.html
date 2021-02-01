@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Welcome to FlaskBlog {% endblock %}</h1>
+    <h1>{% block title %} Welcome to Dish Selector {% endblock %}</h1>
+    <a>
+        <h2>What do you want to do?</h2>
+    </a>
+    <form action=//localhost:5000/main_course>
+        <input type="submit" name="select_dish" value="select main course"/>
+    </form>
+    <a>
+        <h2>{{choice}}</h2>
+    </a>
+    <hr>
 {% endblock %}

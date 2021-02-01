@@ -20,22 +20,10 @@ def read_menu(table):
     return menu
 
 def pick_meal(dish_type_df):
-    while True:
-        menu_len = len(dish_type_df.index)
-        meal_choice = random.randint(0, menu_len - 1)
-        meal = dish_type_df.iloc[[meal_choice], [1]].to_string(header=False, index=False).strip()
-        print('You should make: ' + meal)
-        decision = input('[y] - accept, [n] - try again, [e] - leave: ').lower()
-        if decision == 'e': break
-        elif decision == 'y':
-            popularity = dish_type_df.loc[dish_type_df['dish_name'] == meal, 'popularity'].item()
-            if popularity == 1:
-                # remove dish from df if popularity is 1 
-                dish_type_df = dish_type_df[dish_type_df['dish_name'] != meal]
-            # decrease popularity
-            else: dish_type_df.loc[dish_type_df['dish_name'] == meal, 'popularity'] = popularity - 1
-            return dish_type_df
-
+    menu_len = len(dish_type_df.index)
+    meal_choice = random.randint(0, menu_len - 1)
+    meal = dish_type_df.iloc[[meal_choice], [1]].to_string(header=False, index=False).strip()
+    return meal
 
 def add_meal():
     dish_name = input('Dish name: ').lower()
@@ -73,34 +61,30 @@ clear()
 main_course_df = read_menu('main_course')
 salat_df = read_menu('salat')
 
-print('Hello to the dish selector!')
+#print('Hello to the dish selector!')
+#
+##while True:
+#print('\nWhat do you want to do?\n'
+#    + '[1 - pick a main course, 2 - pick salat, 4 - options, 5 - add meal, exit]')
 
-while True:
-    print('\nWhat do you want to do?\n'
-        + '[1 - pick a main course, 2 - pick salat, 4 - options, 5 - add meal, exit]')
+#decision = input().lower()
+#decision = 'exit'
 
-    #decision = input().lower()
-    decision = 'exit'
-
-    if decision == '1':
-        main_course_df = pick_meal(main_course_df)
-
-    elif decision == '2':
-        salat_df = pick_meal(salat_df)
-    
-    elif decision == '4':
-        print(main_course_df[['dish_name', 'popularity']])
-        print(salat_df[['dish_name', 'popularity']])
-
-    elif decision == '5':
-        add_meal()
-    
-    elif decision == 'exit':
-        conn = sqlite3.connect('dishes.db')
-        with conn:
-            main_course_df.to_sql('main_course', conn, None, 'replace', False)
-            salat_df.to_sql('salat', conn, None, 'replace', False)
-        break
-        
-
-
+#if decision == '1':
+#    main_course_df = pick_meal(main_course_df)
+#
+#elif decision == '2':
+#    salat_df = pick_meal(salat_df)
+#
+#elif decision == '4':
+#    print(main_course_df[['dish_name', 'popularity']])
+#    print(salat_df[['dish_name', 'popularity']])
+#
+#elif decision == '5':
+#    add_meal()
+#
+#elif decision == 'exit':
+#    conn = sqlite3.connect('dishes.db')
+#    with conn:
+#        main_course_df.to_sql('main_course', conn, if_exists='replace', index=False)
+#        salat_df.to_sql('salat', conn, None, 'replace', False)
